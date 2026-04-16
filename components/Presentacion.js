@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, Image, Button, Alert, Linking, StatusBar } from 'react-native';
 
-export default function Presentación() {
+export default function Presentacion() {
 
   const mostrarMensaje = () => {
     Alert.alert("Hola, soy Thomas Canalis");
