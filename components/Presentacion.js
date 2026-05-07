@@ -1,5 +1,7 @@
-import { StyleSheet, View, Text, Image, Button, Alert, Linking, StatusBar, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, Alert, Linking, StatusBar, ScrollView } from 'react-native';
+import { Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Presentacion() {
 
@@ -46,35 +48,71 @@ export default function Presentacion() {
           Aprender más sobre programación y trabajar en el mundo de la tecnología.
         </Text>
 
-        {/* EXTRA */}
         <Text style={styles.subtitulo}>Extra: Champions 2015</Text>
-
-        <Text style={styles.texto}>
-          El FC Barcelona ganó la Champions League 2015 tras una gran temporada.
-        </Text>
-
-        <Text style={styles.texto}>
-          En la final jugó contra la Juventus y ganó 3-1.
-        </Text>
-
-        <Text style={styles.texto}>
-          Los goles fueron de Rakitic, Suárez y Neymar.
-        </Text>
-
+        <Text style={styles.texto}>El FC Barcelona ganó la Champions League 2015 tras una gran temporada.</Text>
+        <Text style={styles.texto}>En la final jugó contra la Juventus y ganó 3-1.</Text>
+        <Text style={styles.texto}>Los goles fueron de Rakitic, Suárez y Neymar.</Text>
         <Text style={styles.texto}>
           Ese equipo tenía un tridente histórico: Messi, Suárez y Neymar (MSN),
           considerado uno de los mejores ataques de la historia del fútbol.
         </Text>
-
         <Text style={styles.texto}>
           Además, el equipo era dirigido por Luis Enrique y logró el triplete
           (Liga, Copa del Rey y Champions).
         </Text>
 
         <View style={styles.botones}>
-          <Button title="Saludar" onPress={mostrarMensaje} />
-          <View style={{ height: 10 }} />
-          <Button title="Abrir GitHub" onPress={abrirGitHub} />
+          <Pressable
+            onPress={mostrarMensaje}
+            onPressIn={() => console.log("Saludar: press iniciado")}
+            onPressOut={() => console.log("Saludar: press soltado")}
+            onLongPress={() => Alert.alert("Long press en Saludar")}
+            hitSlop={{ top: 30, bottom: 30, left: 30, right: 30 }}
+            style={({ pressed }) => [
+              styles.botonWrapper,
+              pressed && { opacity: 0.8, transform: [{ scale: 0.97 }] }
+            ]}
+          >
+            {({ pressed }) => (
+              <LinearGradient
+                colors={["#e040fb", "#7c4dff"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.botonGradiente}
+              >
+                <Text style={styles.botonTexto}>
+                  {pressed ? "SALUDANDO..." : "SALUDAR"}
+                </Text>
+              </LinearGradient>
+            )}
+          </Pressable>
+
+          <View style={{ height: 16 }} />
+          <Pressable
+            onPress={abrirGitHub}
+            onPressIn={() => console.log("GitHub: press iniciado")}
+            onPressOut={() => console.log("GitHub: press soltado")}
+            onLongPress={() => Alert.alert("Long press en GitHub")}
+            hitSlop={{ top: 40, bottom: 40, left: 40, right: 40 }}
+            style={({ pressed }) => [
+              styles.botonWrapper,
+              pressed && { opacity: 0.8, transform: [{ scale: 0.97 }] }
+            ]}
+          >
+            {({ pressed }) => (
+              <LinearGradient
+                colors={["#00bcd4", "#1565c0"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.botonGradiente}
+              >
+                <Text style={styles.botonTexto}>
+                  {pressed ? "ABRIENDO..." : "ABRIR GITHUB"}
+                </Text>
+              </LinearGradient>
+            )}
+          </Pressable>
+
         </View>
 
       </ScrollView>
@@ -95,13 +133,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    color:"#f9fafb",
+    color: "#f9fafb",
   },
   subtitulo: {
     fontSize: 18,
     marginTop: 15,
     fontWeight: "bold",
-    color:"#f9fafb",
+    color: "#f9fafb",
   },
   texto: {
     fontSize: 14,
@@ -116,6 +154,34 @@ const styles = StyleSheet.create({
   },
   botones: {
     marginTop: 20,
-    width: "100%"
+    width: "100%",
+    alignItems: "center",
+  },
+  botonWrapper: {
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: "#ffffff40",
+    overflow: "hidden",
+    width: "80%",
+    shadowColor: "#7c4dff",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.6,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  botonGradiente: {
+    paddingVertical: 14,
+    paddingHorizontal: 30,
+    alignItems: "center",
+    borderRadius: 50,
+  },
+  botonTexto: {
+    color: "#ffffff",
+    fontWeight: "bold",
+    fontSize: 16,
+    letterSpacing: 2,
+    textShadowColor: "rgba(0,0,0,0.4)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   }
 });
