@@ -1,21 +1,21 @@
-import { StyleSheet, View, StatusBar } from 'react-native';
-import Presentacion from './components/Presentacion';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React from 'react';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
+import Main from './components/Main';
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <Presentacion />
+      <SafeAreaView style={styles.safeArea}>
+        <Main />
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: "#121212",
-    padding: 20,
+    backgroundColor: '#3B2A1A',
   },
 });
